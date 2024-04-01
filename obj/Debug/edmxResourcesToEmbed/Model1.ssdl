@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище UNLV_STOREModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="ID_Client" />
+    </Key>
+    <Property Name="ID_Client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClientName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="ClientSurName" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="ID_Tag" Type="int" Nullable="false" />
+    <Property Name="ClientNumberPhone" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClientTags">
+    <Key>
+      <PropertyRef Name="ID_Tag" />
+    </Key>
+    <Property Name="ID_Tag" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TagName" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="ID_Order" />
+    </Key>
+    <Property Name="ID_Order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Client" Type="int" Nullable="false" />
+    <Property Name="ID_Product" Type="int" Nullable="false" />
+    <Property Name="OrderDate" Type="date" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="TotalPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ID_Product" />
+    </Key>
+    <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="ID_ProductType" Type="int" Nullable="false" />
+    <Property Name="QuantityInStock" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductTypes">
+    <Key>
+      <PropertyRef Name="ID_ProductType" />
+    </Key>
+    <Property Name="ID_ProductType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrType" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Clients__ID_Tag__4BAC3F29">
+    <End Role="ClientTags" Type="Self.ClientTags" Multiplicity="1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientTags">
+        <PropertyRef Name="ID_Tag" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="ID_Tag" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__ID_Clien__534D60F1">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ID_Client" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ID_Client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__ID_Produ__5441852A">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ID_Product" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="ID_Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__ID_Pro__5070F446">
+    <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductTypes">
+        <PropertyRef Name="ID_ProductType" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="ID_ProductType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище UNLV_STOREModelContainer">
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClientTags" EntityType="Self.ClientTags" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Clients__ID_Tag__4BAC3F29" Association="Self.FK__Clients__ID_Tag__4BAC3F29">
+      <End Role="ClientTags" EntitySet="ClientTags" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__ID_Clien__534D60F1" Association="Self.FK__Orders__ID_Clien__534D60F1">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__ID_Produ__5441852A" Association="Self.FK__Orders__ID_Produ__5441852A">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__ID_Pro__5070F446" Association="Self.FK__Products__ID_Pro__5070F446">
+      <End Role="ProductTypes" EntitySet="ProductTypes" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

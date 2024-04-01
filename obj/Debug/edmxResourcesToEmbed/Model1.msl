@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище UNLV_STOREModelContainer" CdmEntityContainer="UNLV_STOREEntities">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="UNLV_STOREModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="ID_Client" ColumnName="ID_Client" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="ClientSurName" ColumnName="ClientSurName" />
+          <ScalarProperty Name="ID_Tag" ColumnName="ID_Tag" />
+          <ScalarProperty Name="ClientNumberPhone" ColumnName="ClientNumberPhone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientTags">
+      <EntityTypeMapping TypeName="UNLV_STOREModel.ClientTags">
+        <MappingFragment StoreEntitySet="ClientTags">
+          <ScalarProperty Name="ID_Tag" ColumnName="ID_Tag" />
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="UNLV_STOREModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+          <ScalarProperty Name="ID_Client" ColumnName="ID_Client" />
+          <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="UNLV_STOREModel.Products">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+          <ScalarProperty Name="ID_ProductType" ColumnName="ID_ProductType" />
+          <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTypes">
+      <EntityTypeMapping TypeName="UNLV_STOREModel.ProductTypes">
+        <MappingFragment StoreEntitySet="ProductTypes">
+          <ScalarProperty Name="ID_ProductType" ColumnName="ID_ProductType" />
+          <ScalarProperty Name="PrType" ColumnName="PrType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

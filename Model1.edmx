@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище UNLV_STOREModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID_Client" />
+          </Key>
+          <Property Name="ID_Client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ClientSurName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ID_Tag" Type="int" Nullable="false" />
+          <Property Name="ClientNumberPhone" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientTags">
+          <Key>
+            <PropertyRef Name="ID_Tag" />
+          </Key>
+          <Property Name="ID_Tag" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagName" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Client" Type="int" Nullable="false" />
+          <Property Name="ID_Product" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="date" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID_ProductType" Type="int" Nullable="false" />
+          <Property Name="QuantityInStock" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductTypes">
+          <Key>
+            <PropertyRef Name="ID_ProductType" />
+          </Key>
+          <Property Name="ID_ProductType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrType" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Clients__ID_Tag__4BAC3F29">
+          <End Role="ClientTags" Type="Self.ClientTags" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientTags">
+              <PropertyRef Name="ID_Tag" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="ID_Tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ID_Clien__534D60F1">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID_Client" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ID_Produ__5441852A">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__ID_Pro__5070F446">
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="ID_ProductType" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_ProductType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище UNLV_STOREModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientTags" EntityType="Self.ClientTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Clients__ID_Tag__4BAC3F29" Association="Self.FK__Clients__ID_Tag__4BAC3F29">
+            <End Role="ClientTags" EntitySet="ClientTags" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ID_Clien__534D60F1" Association="Self.FK__Orders__ID_Clien__534D60F1">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ID_Produ__5441852A" Association="Self.FK__Orders__ID_Produ__5441852A">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__ID_Pro__5070F446" Association="Self.FK__Products__ID_Pro__5070F446">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UNLV_STOREModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID_Client" />
+          </Key>
+          <Property Name="ID_Client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientSurName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Tag" Type="Int32" Nullable="false" />
+          <Property Name="ClientNumberPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClientTags" Relationship="Self.FK__Clients__ID_Tag__4BAC3F29" FromRole="Clients" ToRole="ClientTags" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ID_Clien__534D60F1" FromRole="Clients" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="ClientTags">
+          <Key>
+            <PropertyRef Name="ID_Tag" />
+          </Key>
+          <Property Name="ID_Tag" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Clients__ID_Tag__4BAC3F29" FromRole="ClientTags" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Client" Type="Int32" Nullable="false" />
+          <Property Name="ID_Product" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Orders__ID_Clien__534D60F1" FromRole="Orders" ToRole="Clients" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Orders__ID_Produ__5441852A" FromRole="Orders" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductPrice" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID_ProductType" Type="Int32" Nullable="false" />
+          <Property Name="QuantityInStock" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ID_Produ__5441852A" FromRole="Products" ToRole="Orders" />
+          <NavigationProperty Name="ProductTypes" Relationship="Self.FK__Products__ID_Pro__5070F446" FromRole="Products" ToRole="ProductTypes" />
+        </EntityType>
+        <EntityType Name="ProductTypes">
+          <Key>
+            <PropertyRef Name="ID_ProductType" />
+          </Key>
+          <Property Name="ID_ProductType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrType" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__ID_Pro__5070F446" FromRole="ProductTypes" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK__Clients__ID_Tag__4BAC3F29">
+          <End Role="ClientTags" Type="Self.ClientTags" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientTags">
+              <PropertyRef Name="ID_Tag" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="ID_Tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ID_Clien__534D60F1">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID_Client" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ID_Produ__5441852A">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID_Product" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ID_Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__ID_Pro__5070F446">
+          <End Role="ProductTypes" Type="Self.ProductTypes" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTypes">
+              <PropertyRef Name="ID_ProductType" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_ProductType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UNLV_STOREEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="ClientTags" EntityType="Self.ClientTags" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="ProductTypes" EntityType="Self.ProductTypes" />
+          <AssociationSet Name="FK__Clients__ID_Tag__4BAC3F29" Association="Self.FK__Clients__ID_Tag__4BAC3F29">
+            <End Role="ClientTags" EntitySet="ClientTags" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ID_Clien__534D60F1" Association="Self.FK__Orders__ID_Clien__534D60F1">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ID_Produ__5441852A" Association="Self.FK__Orders__ID_Produ__5441852A">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__ID_Pro__5070F446" Association="Self.FK__Products__ID_Pro__5070F446">
+            <End Role="ProductTypes" EntitySet="ProductTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UNLV_STOREModelContainer" CdmEntityContainer="UNLV_STOREEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="UNLV_STOREModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ID_Client" ColumnName="ID_Client" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientSurName" ColumnName="ClientSurName" />
+                <ScalarProperty Name="ID_Tag" ColumnName="ID_Tag" />
+                <ScalarProperty Name="ClientNumberPhone" ColumnName="ClientNumberPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientTags">
+            <EntityTypeMapping TypeName="UNLV_STOREModel.ClientTags">
+              <MappingFragment StoreEntitySet="ClientTags">
+                <ScalarProperty Name="ID_Tag" ColumnName="ID_Tag" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="UNLV_STOREModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+                <ScalarProperty Name="ID_Client" ColumnName="ID_Client" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="UNLV_STOREModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+                <ScalarProperty Name="ID_ProductType" ColumnName="ID_ProductType" />
+                <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTypes">
+            <EntityTypeMapping TypeName="UNLV_STOREModel.ProductTypes">
+              <MappingFragment StoreEntitySet="ProductTypes">
+                <ScalarProperty Name="ID_ProductType" ColumnName="ID_ProductType" />
+                <ScalarProperty Name="PrType" ColumnName="PrType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

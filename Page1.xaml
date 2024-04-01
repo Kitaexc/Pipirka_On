@@ -1,0 +1,23 @@
+﻿<Page x:Class="Pipirka.Page1"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Pipirka"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="Page1">
+
+    <Grid>
+        <DataGrid x:Name="ClientTags" SelectionChanged="Clients_SelectionChanged"/>
+        <Button x:Name="izmen" Content="Изменить" HorizontalAlignment="Left" Height="60" Margin="13,351,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="izmen_Click"/>
+        <TextBox x:Name="One" HorizontalAlignment="Left" Height="29" Margin="218,512,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" materialDesign:HintAssist.Hint="Первый столбец" Cursor=""/>
+        <TextBox x:Name="Two" HorizontalAlignment="Left" Height="29" Margin="355,512,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" materialDesign:HintAssist.Hint="Второй столбец" Cursor=""/>
+        <Button x:Name="insert" Content="Добавить" HorizontalAlignment="Left" Height="60" Margin="13,481,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Click="insert_Click"/>
+        <Button x:Name="Delete" Content="Удалить" HorizontalAlignment="Left" Height="60" Margin="13,416,0,0" VerticalAlignment="Top" Width="200" RenderTransformOrigin="0.307,0.408" FontSize="20" Click="Delete_Click"/>
+        <TextBox x:Name="Three" HorizontalAlignment="Left" Height="29" Margin="492,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" materialDesign:HintAssist.Hint="Трейтий столбец" Cursor=""/>
+        <TextBox x:Name="Four" HorizontalAlignment="Left" Height="29" Margin="629,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" materialDesign:HintAssist.Hint="Четвертый столбец" Cursor=""/>
+        <TextBox x:Name="Five" HorizontalAlignment="Left" Height="29" Margin="766,511,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" materialDesign:HintAssist.Hint="Пятый столбец" Cursor=""/>
+    </Grid>
+</Page>
